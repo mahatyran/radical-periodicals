@@ -1,0 +1,31 @@
+#!/bin/bash
+
+BPP_INDEX="https://www.marxists.org/history/usa/pubs/black-panther/"
+BPP_LINKS_OUTPUT_FILE="./csv-output/bpp_links"
+BPP_ANCHORS_OUTPUT_FILE="./csv-output/bpp_anchors"
+BPP_CSV_OUTPUT_FILE="./csv-output/bpp_issues_links_covers.csv"
+echo "vol_iss_date", "pdf_link", "cover_loc", "iss_loc" > "$BPP_CSV_OUTPUT_FILE"
+
+echo "Scraping links from ${BPP_INDEX}"
+
+curl -s $BPP_INDEX | grep -Po '(?<=href=")[^"]*' > $BPP_LINKS_OUTPUT_FILE
+echo "Scraped links and saved to ${BPP_LINKS_OUTPUT_FILE}"
+
+curl -s $BPP_INDEX | perl -0777 -ne 'while (/<a\b[^>]*>(.*?)<\/a>/gis) { print "$1\n" }' > $BPP_ANCHORS_OUTPUT_FILE
+echo "Scraped anchor text and saved to ${BPP_ANCHORS_OUTPUT_FILE}"
+
+paste $BPP_LINKS_OUTPUT_FILE $BPP_ANCHORS_OUTPUT_FILE | while IFS=$'\t' read -r link anchor; do
+  if [[ "$link" == *.pdf ]]; then
+    echo "$link $anchor"
+
+    encoded_tmp="${link// /%20}"
+    download_link="${BPP_INDEX}${encoded_tmp}"
+    issue_output_file="./black-panther/bpp-issues/${encoded_tmp}"
+    first_page_output_file="./black-panther/bpp-covers/${encoded_tmp:0:-4}_cover.pdf"
+
+    curl -L -o "$issue_output_file" "$download_link"
+    qpdf "$issue_output_file" --pages "$issue_output_file" 1 -- "$first_page_output_file"
+
+    echo "\"$anchor\", $download_link, $first_page_output_file, $issue_output_file" >> $BPP_CSV_OUTPUT_FILE
+  fi
+done
