@@ -29,3 +29,6 @@ paste $BPP_LINKS_OUTPUT_FILE $BPP_ANCHORS_OUTPUT_FILE | while IFS=$'\t' read -r 
     echo "\"$anchor\", $download_link, $first_page_output_file, $issue_output_file" >> $BPP_CSV_OUTPUT_FILE
   fi
 done
+
+echo "All issues, covers downloaded!"
+echo "See information in ${BPP_CSV_OUTPUT_FILE}"
