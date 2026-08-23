@@ -17,6 +17,8 @@ CSV_OUTPUT_FILE="./csv-output/${PERIODICAL_ACRONYM}_issues_links_covers.csv"
 echo "vol_iss_date", "pdf_link", "cover_loc", "iss_loc" > "$CSV_OUTPUT_FILE"
 ISSUES_DIR="./periodicals/${PERIODICAL_NAME}/${PERIODICAL_ACRONYM}-issues/"
 COVERS_DIR="./periodicals/${PERIODICAL_NAME}/${PERIODICAL_ACRONYM}-covers/"
+mkdir -p $ISSUES_DIR
+mkdir -p $COVERS_DIR
 
 echo "Scraping links from ${INDEX}"
 
