@@ -3,9 +3,17 @@
 # ---------------------------
 # Change the below three variables based on what you're downloading
 # ---------------------------
-PERIODICAL_NAME="black-panther"
-PERIODICAL_ACRONYM="bpp"
-INDEX="https://www.marxists.org/history/usa/pubs/black-panther/"
+echo "Enter the webpage index that hosts links for the periodical that you're downloading. It must be a full link."
+echo "Example: 'https://www.marxists.org/history/usa/pubs/black-panther/'"
+read INDEX
+
+echo "Enter the name of the periodical that you're downloading. Do not include numbers, spaces, or capital letters."
+echo "Example: 'black-panther'"
+read PERIODICAL_NAME
+
+echo "Enter the acronym of the periodical that you're downloading. Do not include numbers, spaces, capital letters, or dashes."
+echo "Example: 'bpp'"
+read PERIODICAL_ACRONYM
 
 # ---------------------------
 # Don't touch anything below!
