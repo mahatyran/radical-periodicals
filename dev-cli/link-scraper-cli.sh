@@ -35,6 +35,7 @@ fi
 
 if [ "$VALID" = false ]; then
   echo ""
+  echo "Inputs provided: $INDEX $PERIODICAL_NAME $PERIODICAL_ACRONYM"
   echo "Invalid inputs: $INVALID_INPUTS"
   echo "Three arguments required."
   echo ""
