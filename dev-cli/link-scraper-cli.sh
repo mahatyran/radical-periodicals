@@ -60,7 +60,7 @@ COVERS_DIR="./periodicals/${PERIODICAL_NAME}/${PERIODICAL_ACRONYM}-covers/"
 
 echo "Scraping links from ${INDEX}"
 
-curl -s $INDEX | grep -Po '(?<=href=")[^"]*' > $LINKS_OUTPUT_FILE
+curl -s $INDEX | grep -Po '(?<=<a href=")[^"]*' > $LINKS_OUTPUT_FILE
 echo "Scraped links and saved to ${LINKS_OUTPUT_FILE}"
 
 curl -s $INDEX | perl -0777 -ne 'while (/<a\b[^>]*>(.*?)<\/a>/gis) { print "$1\n" }' > $ANCHORS_OUTPUT_FILE
