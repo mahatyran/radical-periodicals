@@ -10,3 +10,5 @@ https://www.marxists.org/history/erol/periodicals/getting-together/index.htm
 ## parent list of all periodicals
 
 https://www.marxists.org/history/erol/periodicals/
+
+https://www.marxists.org/history/usa/
