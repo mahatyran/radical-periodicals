@@ -1,8 +1,15 @@
 #!/bin/bash
 
+# ---------------------------
+# Change the below three variables based on what you're downloading
+# ---------------------------
+INDEX="https://www.marxists.org/history/usa/pubs/black-panther/"
 PERIODICAL_NAME="black-panther"
 PERIODICAL_ACRONYM="bpp"
-INDEX="https://www.marxists.org/history/usa/pubs/black-panther/"
+
+# ---------------------------
+# Don't touch anything below!
+# ---------------------------
 
 LINKS_OUTPUT_FILE="./csv-output/${PERIODICAL_ACRONYM}_links"
 ANCHORS_OUTPUT_FILE="./csv-output/${PERIODICAL_ACRONYM}_anchors"
