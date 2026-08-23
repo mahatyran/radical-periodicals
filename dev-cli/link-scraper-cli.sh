@@ -3,17 +3,49 @@
 # ---------------------------
 # Change the below three variables based on what you're downloading
 # ---------------------------
-echo "Enter the webpage index that hosts links for the periodical that you're downloading. It must be a full link."
-echo "Example: 'https://www.marxists.org/history/usa/pubs/black-panther/'"
-read INDEX
+URL_REGEX="^(https?):\/\/([a-zA-Z0-9.-]+(:[0-9]+)?)\/?([^ ]*)$"
+PERIODICAL_NAME_REGEX="^[[:lower:]-]+$"
+PERIODICAL_ACRONYM_REGEX="^[[:lower:]]+$"
 
-echo "Enter the name of the periodical that you're downloading. Do not include numbers, spaces, or capital letters."
-echo "Example: 'black-panther'"
-read PERIODICAL_NAME
+INDEX=$1
+PERIODICAL_NAME=$2
+PERIODICAL_ACRONYM=$3
 
-echo "Enter the acronym of the periodical that you're downloading. Do not include numbers, spaces, capital letters, or dashes."
-echo "Example: 'bpp'"
-read PERIODICAL_ACRONYM
+VALID=true
+INVALID_INPUTS=""
+
+if [ "$#" -ne 3 ]; then
+  VALID=false
+fi
+
+if [[ ! $INDEX =~ $URL_REGEX ]]; then
+  VALID=false
+  INVALID_INPUTS+="$INDEX "
+fi
+
+if [[ ! $PERIODICAL_NAME =~ $PERIODICAL_NAME_REGEX ]]; then
+  VALID=false
+  INVALID_INPUTS+="$PERIODICAL_NAME "
+fi
+
+if [[ ! $PERIODICAL_ACRONYM =~ $PERIODICAL_ACRONYM_REGEX ]]; then
+  VALID=false
+  INVALID_INPUTS+="$PERIODICAL_ACRONYM "
+fi
+
+if [ "$VALID" = false ]; then
+  echo ""
+  echo "Invalid inputs: $INVALID_INPUTS"
+  echo "Three arguments required."
+  echo ""
+  echo "Usage: $0 <index url> <periodical name> <periodical acronym>"
+  echo "Example usage: $0 https://www.marxists.org/history/usa/pubs/black-panther/ black-panther bpp"
+  echo ""
+  echo "<index url> should link to a valid webpage containing links to pdfs of the periodical you want to scrape. It must start with https:// or http://."
+  echo "<periodical name> should be the name of the periodical, only with lowercase alphabetic characters and dashes."
+  echo "<periodical acronym> should be a short acronym for the periodical, only with lowercase alphabetic characters."
+  exit 1
+fi
 
 # ---------------------------
 # Don't touch anything below!
