@@ -8,7 +8,7 @@ if [ ! -f $PERIODICALS_INDEX_DB_CSV ]; then
 fi
 
 # Read the CSV line by line
-tail -n +2 $PERIODICALS_INDEX_DB_CSV | while IFS=',' read -r index name acronym; do
+tail -n +2 $PERIODICALS_INDEX_DB_CSV | tr -d '\r' | while IFS=',' read -r index name acronym || [ -n "$index" ]; do
     
     # Skip empty lines
     [ -z "$index" ] && continue
