@@ -1,12 +1,15 @@
 #!/bin/bash
 
+PERIODICAL_NAME="black-panther"
+PERIODICAL_ACRONYM="bpp"
 INDEX="https://www.marxists.org/history/usa/pubs/black-panther/"
-LINKS_OUTPUT_FILE="./csv-output/bpp_links"
-ANCHORS_OUTPUT_FILE="./csv-output/bpp_anchors"
-CSV_OUTPUT_FILE="./csv-output/bpp_issues_links_covers.csv"
+
+LINKS_OUTPUT_FILE="./csv-output/${PERIODICAL_ACRONYM}_links"
+ANCHORS_OUTPUT_FILE="./csv-output/${PERIODICAL_ACRONYM}_anchors"
+CSV_OUTPUT_FILE="./csv-output/${PERIODICAL_ACRONYM}_issues_links_covers.csv"
 echo "vol_iss_date", "pdf_link", "cover_loc", "iss_loc" > "$CSV_OUTPUT_FILE"
-ISSUES_DIR="./periodicals/black-panther/bpp-issues/"
-COVERS_DIR="./periodicals/black-panther/bpp-covers/"
+ISSUES_DIR="./periodicals/${PERIODICAL_NAME}/${PERIODICAL_ACRONYM}-issues/"
+COVERS_DIR="./periodicals/${PERIODICAL_NAME}/${PERIODICAL_ACRONYM}-covers/"
 
 echo "Scraping links from ${INDEX}"
 
